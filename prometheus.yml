@@ -1,0 +1,14 @@
+global:
+  scrape_interval: 10s
+
+scrape_configs:
+  - job_name: 'myappointment-app'
+    metrics_path: '/health-service/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: [ 'docker.for.mac.localhost:8000' ]
+    #        TODO why this is not working?
+    #      - targets: [ 'appointment-api:8000' ]
+    basic_auth:
+      username: "myapp"
+      password: "myapp"

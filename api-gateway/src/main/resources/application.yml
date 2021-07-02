@@ -1,0 +1,21 @@
+server:
+  port: 9000
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: appointment_id
+          uri: 'http://localhost:8000'
+          predicates:
+            - Path=/health-service/**
+  application:
+    name: API-GATEWAY
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:9001/eureka/
+    healthcheck: true
+  instance:
+    hostname: api-gateway

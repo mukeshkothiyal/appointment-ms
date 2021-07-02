@@ -1,0 +1,82 @@
+version: '3.9'
+
+networks:
+  monitor-appointment:
+    driver: bridge
+
+services:
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: appointment-db
+    volumes:
+      - ./health_service_data/volumes_myappointment/postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=myApp@123
+      - POSTGRES_USER=myappointment
+      - POSTGRES_DB=appointmentdb
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    networks:
+      - monitor-appointment
+    ports:
+      - "5400:5432"
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./health_service_data/volumes_myappointment/prometheus_data:/prometheus
+    networks:
+      - monitor-appointment
+    ports:
+      - "9090:9090"
+  service-discovery:
+    image: 'service-discovery-eureka'
+    container_name: service-discovery-eureka
+    build:
+      context: eureka/
+    networks:
+      - monitor-appointment
+    ports:
+      - "9001:9001"
+  api-gateway:
+    image: 'api-gateway'
+    container_name: api-gateway
+    build:
+      context: api-gateway/
+    networks:
+      - monitor-appointment
+    ports:
+    - "9000:9000"
+    depends_on:
+      - service-discovery
+      - appointment-api
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./health_service_data/volumes_myappointment/grafana_data:/var/lib/grafana
+    networks:
+      - monitor-appointment
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=grafana
+      - GF_SECURITY_ADMIN_PASSWORD=grafana123
+      - GF_USERS_ALLOW_SIGN_UP=false
+  appointment-api:
+    image: 'appointment-api:latest'
+    container_name: appointment-api
+    build:
+      context: myappointment/
+    depends_on:
+      - db
+      - service-discovery
+    networks:
+      - monitor-appointment
+    ports:
+      - "7000:7000"
+      - "8000:8000"
+    deploy:
+      mode: replicated
+      replicas: 1
