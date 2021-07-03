@@ -7,7 +7,11 @@ spring:
         - id: appointment_id
           uri: 'http://appointment-api:8000'
           predicates:
-            - Path=/health-service/**
+            - Path=/appointment/**
+        - id: mail_id
+          uri: 'http://mail-api:8001'
+          predicates:
+            - Path=/mail/**
   application:
     name: API-GATEWAY
 eureka:
