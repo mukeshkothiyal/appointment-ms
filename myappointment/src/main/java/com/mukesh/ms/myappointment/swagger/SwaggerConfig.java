@@ -20,8 +20,8 @@ import java.util.Map;
 public class SwaggerConfig {
   @Bean
   public OpenAPI openAPI() {
-    Server server = new Server().url("http://localhost:8000");
-    server.description("Health Service API");
+    Server server = new Server().url("http://localhost:9000/appointment");
+    server.description("Appointment Service API");
     List<Server> servers = new ArrayList<>();
     servers.add(server);
 
