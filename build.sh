@@ -13,12 +13,15 @@ sleep 5s
 
 # build app services
 mvn clean install -f myappointment/pom.xml
+mvn clean install -f mail-service/pom.xml
 
 # remove old app service images
 docker rmi appointment-api:latest
+docker rmi mail-api:latest
 
-# bring up all remaining services
+# bring up application services
 docker-compose up -d appointment-api
+docker-compose up -d mail-api
 
 # build api gateway
 mvn clean install -f api-gateway/pom.xml

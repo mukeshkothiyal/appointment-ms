@@ -80,3 +80,18 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+  mail-api:
+    image: 'mail-api:latest'
+    container_name: mail-api
+    build:
+      context: mail-service/
+    depends_on:
+      - service-discovery
+    networks:
+      - monitor-appointment
+    ports:
+      - "7001:7001"
+      - "8001:8001"
+    deploy:
+      mode: replicated
+      replicas: 1

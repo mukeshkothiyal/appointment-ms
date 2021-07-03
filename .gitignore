@@ -3,3 +3,4 @@
 **/.mvn/
 
 .DS_Store
+.cache/
