@@ -32,7 +32,7 @@ public class AppointmentController {
   ModelMapper mapper;
 
   @Autowired
-  public AppointmentController(AppointmentService appointmentService, UserService userService, ModelMapper mapper) {
+  public AppointmentController(AppointmentService appointmentService, ModelMapper mapper) {
     this.appointmentService = appointmentService;
     this.mapper = mapper;
   }

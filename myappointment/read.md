@@ -1,6 +1,6 @@
-application running on: http://localhost:8000/health-service/health
+application running on: http://localhost:8000/health
 
-swagger: http://localhost:8000/health-service/swagger-ui/index.html?configUrl=/health-service/v3/api-docs/swagger-config#
+swagger: http://localhost:8000/swagger-ui/index.html?configUrl=/health-service/v3/api-docs/swagger-config#
 
 
 <code>
