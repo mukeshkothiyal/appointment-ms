@@ -5,7 +5,6 @@ import com.mukesh.ms.myappointment.model.dto.AppointmentDto;
 import com.mukesh.ms.myappointment.model.entity.Appointment;
 import com.mukesh.ms.myappointment.model.entity.User;
 import com.mukesh.ms.myappointment.service.AppointmentService;
-import com.mukesh.ms.myappointment.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;

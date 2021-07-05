@@ -2,7 +2,9 @@ package com.mukesh.ms.myappointment.controller;
 
 import com.mukesh.ms.myappointment.exception.ResourceNotFoundException;
 import com.mukesh.ms.myappointment.model.dto.UserDto;
+import com.mukesh.ms.myappointment.model.dto.outgoing.MessageDto;
 import com.mukesh.ms.myappointment.model.entity.User;
+import com.mukesh.ms.myappointment.service.KafkaService;
 import com.mukesh.ms.myappointment.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
@@ -25,11 +27,13 @@ import javax.validation.Valid;
 public class UserController {
   UserService userService;
   ModelMapper modelMapper;
+  KafkaService kafkaService;
 
   @Autowired
-  public UserController(UserService userService, ModelMapper modelMapper) {
+  public UserController(UserService userService, ModelMapper modelMapper, KafkaService kafkaService) {
     this.userService = userService;
     this.modelMapper = modelMapper;
+    this.kafkaService = kafkaService;
   }
 
   @GetMapping("{user-id}")
@@ -47,7 +51,16 @@ public class UserController {
   @Operation(description = "Create new user in system", tags = "user")
   public ResponseEntity<UserDto> createNewUser(@Valid @RequestBody UserDto userDto) {
     log.info("Inside createNewUser for {}", userDto);
-    return ResponseEntity.status(HttpStatus.OK).body(convertToDto(userService.createNewUser(convertToEntity(userDto))));
+    UserDto createdUser = convertToDto(userService.createNewUser(convertToEntity(userDto)));
+    this.sendUserCreationMail(createdUser.getEmailId());
+    return ResponseEntity.status(HttpStatus.OK).body(createdUser);
+  }
+
+  private void sendUserCreationMail(String emailId) {
+    MessageDto messageDto = new MessageDto();
+    messageDto.setMailType(MessageDto.MailType.ACC_CREATED);
+    messageDto.setTo(emailId);
+    kafkaService.send(messageDto);
   }
 
   private UserDto convertToDto(User user) {
