@@ -30,7 +30,7 @@ mvn clean install -f api-gateway/pom.xml
 docker rmi api-gateway:latest
 
 ## bring up all remaining infra services
-docker-compose up -d grafana prometheus api-gateway
+docker-compose up -d grafana prometheus zookeeper kafka api-gateway
 
 # delete all dangling (mostly <non>:<none>) images
 docker rmi $(docker images -f "dangling=true" -q)

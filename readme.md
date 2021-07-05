@@ -31,6 +31,23 @@ mailing service, prescription api, patient history, admin dashboard, patient das
 <h6>Server</h6>
 <li>Tomcat</li>
 
+<h6>Message Broker</h6>
+<p>Kafka with Zookeeper</p>
+
+[Github image URL](https://gist.github.com/rmoff/fb7c39cc189fc6082a5fbd390ec92b3d)
+</br>
+Manually creating topic and testing via consumer and producer
+
+1. Connecting to container
+   <code>docker exec -it <container-id> /bin/bash</code>
+2. Creating new queue
+   <code>kafka-topics --create --topic appointment-mail-topic --partitions 2 --replication-factor 1 --zookeeper zookeeper:2181</code>
+3. Producer
+   <code>kafka-console-producer --broker-list localhost:29092 --topic appointment-mail-topic</code>
+4. consumer
+   <code>kafka-console-consumer --bootstrap-server localhost:29092 --topic appointment-mail-topic --from-beginning</code>
+   
+
 <h5>Design</h5>
 <p>To generate docker compose diagram:</p>
 <h6>Architecture Diagram</h6>
