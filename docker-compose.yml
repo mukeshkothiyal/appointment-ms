@@ -29,6 +29,49 @@ services:
       - monitor-appointment
     ports:
       - "9090:9090"
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - monitor-appointment
+  kafka:
+    # "`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-
+    # An important note about accessing Kafka from clients on other machines:
+    # -----------------------------------------------------------------------
+    #
+    # The config used here exposes port 29092 for _external_ connections to the broker
+    # i.e. those from _outside_ the docker network. This could be from the host machine
+    # running docker, or maybe further afield if you've got a more complicated setup.
+    # If the latter is true, you will need to change the value 'localhost' in
+    # KAFKA_ADVERTISED_LISTENERS to one that is resolvable to the docker host from those
+    # remote clients
+    #
+    # For connections _internal_ to the docker network, such as from other services
+    # and components, use kafka:9092.
+    #
+    # See https://rmoff.net/2018/08/02/kafka-listeners-explained/ for details
+    # "`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-
+    #
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_CREATE_TOPICS: appointment-mail-topic:3:1
+    networks:
+      - monitor-appointment
   service-discovery:
     image: 'service-discovery-eureka'
     container_name: service-discovery-eureka
@@ -50,6 +93,7 @@ services:
     depends_on:
       - service-discovery
       - appointment-api
+      - mail-api
   grafana:
     image: grafana/grafana
     container_name: grafana
@@ -72,6 +116,7 @@ services:
     depends_on:
       - db
       - service-discovery
+      - kafka
     networks:
       - monitor-appointment
     ports:
@@ -87,6 +132,7 @@ services:
       context: mail-service/
     depends_on:
       - service-discovery
+      - kafka
     networks:
       - monitor-appointment
     ports:
