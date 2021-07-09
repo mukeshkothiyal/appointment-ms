@@ -20,7 +20,7 @@ import java.util.Map;
 public class SwaggerConfig {
   @Bean
   public OpenAPI openAPI() {
-    Server server = new Server().url("http://localhost:9000/mail");
+    Server server = new Server().url("https://localhost:9000/mail");
     server.description("Mail Service API");
     List<Server> servers = new ArrayList<>();
     servers.add(server);
