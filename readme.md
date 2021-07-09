@@ -47,6 +47,9 @@ Manually creating topic and testing via consumer and producer
 4. consumer
    <code>kafka-console-consumer --bootstrap-server localhost:29092 --topic appointment-mail-topic --from-beginning</code>
    
+<h6>SSL Certificate</h6>
+<p>New keystore can be generated using below command:</p>
+<code>keytool -genkeypair -alias healthservice -keyalg RSA -keysize 4096 -storetype PKCS12 -keystore healthservice.p12 -validity 3650 -storepass password</code>
 
 <h5>Design</h5>
 <p>To generate docker compose diagram:</p>
@@ -67,7 +70,7 @@ Manually creating topic and testing via consumer and producer
 <label>Name: </label>
 <b>MyAppointment</b>
 
-[Swagger URL](http://localhost:9000/appointment/swagger-ui/index.html?configUrl=/appointment/v3/api-docs/swagger-config#/)
+[Swagger URL](https://localhost:9000/appointment/swagger-ui/index.html?configUrl=/appointment/v3/api-docs/swagger-config#/)
 
 <h6>Screenshot</h6>
 
@@ -77,7 +80,7 @@ Manually creating topic and testing via consumer and producer
 <label>Name: </label>
 <b>Mail API</b>
 
-[Swagger URL](http://localhost:9000/mail/swagger-ui/index.html?configUrl=/mail/v3/api-docs/swagger-config)
+[Swagger URL](https://localhost:9000/mail/swagger-ui/index.html?configUrl=/mail/v3/api-docs/swagger-config)
 
 <h6>Screenshot</h6>
 
