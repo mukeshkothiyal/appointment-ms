@@ -1,10 +1,14 @@
 <div class="container">
   <div class="card-title">
-    <h1 style="color: #888888">Health Service</h1>
+    <h2 style="color: #888888">{{welcomeMsg}}</h2>
   </div>
-  <h5 style="color: #777777">{{welcomeMsg}}</h5>
 
-  <hs-appointment></hs-appointment>
+  <nav class="navbar navbar-expand navbar-light bg-light">
+    <a class="navbar-brand" style="color: #777777">{{pageTitle}}</a>
+    <ul class="nav nav-pills">
+      <li><a class="nav-link" routerLink="/appointments">Appointment</a></li>
+    </ul>
+  </nav>
+
+  <router-outlet></router-outlet>
 </div>
-
-<router-outlet></router-outlet>
