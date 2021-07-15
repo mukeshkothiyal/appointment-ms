@@ -1,7 +1,12 @@
 # HealthServiceUi
 
 A frontend application for health-service api.
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.1.
+
+## Wireframe
+#### Appointment Screen
+![Appointment](../images/app-wireframes/ui/hs-ui-app.png)
+#### User Details Screen
+![User Details](../images/app-wireframes/ui/hs-ui-user.png)
 
 ## Development server
 

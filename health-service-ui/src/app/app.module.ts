@@ -7,12 +7,14 @@ import { AppointmentComponent } from './appointment/appointment.component';
 import {FormsModule} from "@angular/forms";
 import {PsvPipe} from "./shared/psv.pipe";
 import {HttpClientModule} from "@angular/common/http";
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppointmentComponent,
-    PsvPipe
+    PsvPipe,
+    UserComponent
   ],
   imports: [
     BrowserModule,

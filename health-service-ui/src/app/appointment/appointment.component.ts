@@ -4,7 +4,6 @@ import {AppointmentService} from "./appointment.service";
 import {Subscriber, Subscription} from "rxjs";
 
 @Component({
-  selector: 'hs-appointment',
   templateUrl: './appointment.component.html',
   styleUrls: ['./appointment.component.css']
 })

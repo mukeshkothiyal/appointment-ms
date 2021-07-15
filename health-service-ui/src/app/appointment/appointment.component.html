@@ -29,14 +29,20 @@
         </thead>
         <tbody>
         <tr *ngFor="let patient of filteredMockAppointments">
-          <td>{{patient.patientId}}</td>
+          <td>
+            <a [routerLink]="['/user', patient.patientId]">{{patient.patientId}}</a>
+          </td>
           <td>{{patient.appointmentTime | date}}</td>
-          <td>{{patient.doctorId}}</td>
+          <td>
+            <a [routerLink]="['/user', patient.doctorId]">{{patient.doctorId}}</a>
+          </td>
           <td>{{patient.additionalComment | psv:','}}</td>
         </tr>
         </tbody>
       </table>
-      <button class="btn btn-primary">Add New Appointment</button>
     </div>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-primary">Add New Appointment</button>
   </div>
 </div>

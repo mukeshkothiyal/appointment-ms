@@ -12,11 +12,10 @@ import java.util.UUID;
 @Repository
 public interface AppointmentRepo extends JpaRepository<Appointment, UUID> {
 
-  @Query(value = "with\n" +
-          "patient as (select count(0) cn from impl_user where user_id = :patientId and type = 'PATIENT'),\n" +
-          "doctor as (select count(0) cn from impl_user where user_id = :doctorId and type = 'DOCTOR'),\n" +
-          "frontdesk as (select count(0) cn from impl_user where user_id = :createdBy  and type = 'FRONTDESK')\n" +
-          "select patient.cn * doctor.cn * frontdesk.cn from patient, doctor, frontdesk", nativeQuery = true)
+  @Query(value = "select\n" +
+          "(select count(0) cn from impl_user where user_id = :patientId and type = 'PATIENT') * \n" +
+          "(select count(0) cn from impl_user where user_id = :doctorId and type = 'DOCTOR') * \n" +
+          "(select count(0) cn from impl_user where user_id = :createdBy  and type = 'FRONTDESK')", nativeQuery = true)
   int isValidIdentity(UUID patientId, UUID doctorId, UUID createdBy);
 
 
