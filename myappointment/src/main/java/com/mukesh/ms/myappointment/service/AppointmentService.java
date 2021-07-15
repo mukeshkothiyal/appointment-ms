@@ -6,6 +6,10 @@ import com.mukesh.ms.myappointment.repository.AppointmentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
@@ -34,8 +38,16 @@ public class AppointmentService {
     return appointmentRepo.findById(uuid);
   }
 
-  public boolean isValidAppointment(AppointmentDto appointmentDto) {
-    boolean isValidAppointment = appointmentRepo.isValidAppointment(appointmentDto.getPatientId(), appointmentDto.getDoctorId(), appointmentDto.getCreatedBy()) > 0;
+  public boolean isValidIdentity(AppointmentDto appointmentDto) {
+    boolean isValidAppointment = appointmentRepo.isValidIdentity(appointmentDto.getPatientId(), appointmentDto.getDoctorId(), appointmentDto.getCreatedBy()) > 0;
     return isValidAppointment;
+  }
+
+  public List<Appointment> getUpcomingAppointments() {
+    LocalDate today = LocalDate.now();
+    Date startDate = Date.from(today.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    LocalDate tomorrow = LocalDate.now().plusDays(1);
+    Date endDate = Date.from(tomorrow.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    return appointmentRepo.findAppointmentByAppointmentTimeBetween(startDate, endDate);
   }
 }

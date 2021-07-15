@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolationException;
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +24,7 @@ public class HealthServiceExceptionHandler {
   @ExceptionHandler({ResourceNotFoundException.class})
   @ResponseBody
   public String handleResourceNotFound(ResourceNotFoundException ex) {
+    log.error("ResourceNotFoundException ::", ex);
     return ex.getMessage();
   }
 
@@ -32,6 +32,7 @@ public class HealthServiceExceptionHandler {
   @ExceptionHandler({ConstraintViolationException.class})
   @ResponseBody
   public List<String> handleConstraintViolationException(ConstraintViolationException ex) {
+    log.error("ConstraintViolationException ::", ex);
     return ex.getConstraintViolations().stream().map(cv -> cv.getMessage()).collect(Collectors.toList());
   }
 
@@ -39,6 +40,7 @@ public class HealthServiceExceptionHandler {
   @ExceptionHandler({PSQLException.class})
   @ResponseBody
   public String handlePSQLException(PSQLException ex) {
+    log.error("PSQLException ::", ex);
     return ex.getServerErrorMessage().getDetail();
   }
 
@@ -46,6 +48,7 @@ public class HealthServiceExceptionHandler {
   @ExceptionHandler({MethodArgumentNotValidException.class})
   @ResponseBody
   public List<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+    log.error("MethodArgumentNotValidException ::", ex);
     List<String> errList = ex.getBindingResult().getAllErrors().stream().map(x -> x.getDefaultMessage()).collect(Collectors.toList());
     return errList;
   }
@@ -54,6 +57,7 @@ public class HealthServiceExceptionHandler {
   @ExceptionHandler({EntityNotFoundException.class})
   @ResponseBody
   public String handleEntityNotFoundException(EntityNotFoundException ex) {
+    log.error("EntityNotFoundException ::", ex);
     return ex.getMessage();
   }
 
@@ -61,6 +65,7 @@ public class HealthServiceExceptionHandler {
   @ExceptionHandler({HttpMessageNotReadableException.class})
   @ResponseBody
   public String handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
+    log.error("HttpMessageNotReadableException ::", ex);
     return ex.getMessage();
   }
 
@@ -68,6 +73,7 @@ public class HealthServiceExceptionHandler {
   @ExceptionHandler({DataIntegrityViolationException.class})
   @ResponseBody
   public String handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+    log.error("DataIntegrityViolationException ::", ex);
     Throwable e = fetchPSQLExceptionIfAny(ex, 4);
     return e.getMessage();
   }
