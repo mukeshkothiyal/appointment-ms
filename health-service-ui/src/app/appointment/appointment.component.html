@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-header">
+    <b>Upcoming Appointments</b>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-2">
+        Filter By:
+      </div>
+      <div class="col-md-4">
+        <input type='text' [(ngModel)]="filterName"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h5 style="color: #888888">Filtered By: {{filterName}}</h5>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table" *ngIf="mockAppointments.length">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Slot</th>
+          <th>Doctor</th>
+          <th>Symptoms</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let patient of filteredMockAppointments">
+          <td>{{patient.patientId}}</td>
+          <td>{{patient.appointmentTime | date}}</td>
+          <td>{{patient.doctorId}}</td>
+          <td>{{patient.additionalComment | psv:','}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-primary">Add New Appointment</button>
+    </div>
+  </div>
+</div>
