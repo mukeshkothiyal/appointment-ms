@@ -1,5 +1,11 @@
 server:
   port: 9000
+  ssl:
+    key-store: classpath:healthservice.p12
+    key-store-password: password
+    key-store-type: PKCS12
+    key-alias: healthservice
+    key-password: password
 spring:
   cloud:
     gateway:

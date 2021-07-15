@@ -20,11 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
 @RequestMapping("/appointment/")
+//@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class AppointmentController {
   AppointmentService appointmentService;
 
@@ -57,6 +60,15 @@ public class AppointmentController {
     return ResponseEntity.status(HttpStatus.OK).body(convertToDto(newAppointment));
   }
 
+  @GetMapping("/upcomingApp")
+  @Operation(description = "Get upcoming appointments for the day", tags = "appointment")
+  public ResponseEntity<List<AppointmentDto>> getUpcomingAppointments() {
+    log.info("Inside upcoming appointment");
+    List<Appointment> appointmentList = appointmentService.getUpcomingAppointments();
+    List<AppointmentDto> appointmentDtos = appointmentList.stream().map(x -> convertToDto(x)).collect(Collectors.toList());
+    return ResponseEntity.status(HttpStatus.OK).body(appointmentDtos);
+  }
+
   private AppointmentDto convertToDto(Appointment appointment) {
     AppointmentDto appointmentDto = new AppointmentDto();
     mapper.map(appointment, appointmentDto);
@@ -85,8 +97,8 @@ public class AppointmentController {
   private void validateAppointment(AppointmentDto appointmentDto) {
     if (appointmentDto.getDoctorId().equals(appointmentDto.getPatientId())) {
       throw new DataIntegrityViolationException("Patient and Doctor can't be same person");
-    } else if (!appointmentService.isValidAppointment(appointmentDto)) {
-      throw new DataIntegrityViolationException("User fields are not mapped correctly");
+    } else if (!appointmentService.isValidIdentity(appointmentDto)) {
+      throw new DataIntegrityViolationException("User Ids are not mapped to correct user type");
     }
   }
 }
