@@ -1,6 +1,6 @@
 <h1>Health Service</h1>
 
-<div style="color: red">This is work in progress...</div>
+<div style="color: red"><b>This is work in progress...</b></div>
 
 <p>
 A dumb down version of health service api. The core functionality that will be offered by this API will be: 
