@@ -19,10 +19,19 @@ public class AppointmentDto {
   private UUID doctorId;
 
   @NotNull
+  private String doctorName;
+
+  @NotNull
   private UUID patientId;
 
   @NotNull
-  private UUID createdBy;
+  private String patientName;
+
+  @NotNull
+  private UUID operatorId;
+
+  @NotNull
+  private String operatorName;
 
   @NotNull
   private Timestamp createdTs;

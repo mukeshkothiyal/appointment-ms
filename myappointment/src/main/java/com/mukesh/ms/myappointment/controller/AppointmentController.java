@@ -72,9 +72,18 @@ public class AppointmentController {
   private AppointmentDto convertToDto(Appointment appointment) {
     AppointmentDto appointmentDto = new AppointmentDto();
     mapper.map(appointment, appointmentDto);
-    appointmentDto.setDoctorId(appointment.getDoctor().getUserId());
-    appointmentDto.setPatientId(appointment.getPatient().getUserId());
-    appointmentDto.setCreatedBy(appointment.getCreatedBy().getUserId());
+
+    User doc = appointment.getDoctor();
+    appointmentDto.setDoctorId(doc.getUserId());
+    appointmentDto.setDoctorName(getName(doc.getFirstName(), doc.getLastName()));
+
+    User patient = appointment.getPatient();
+    appointmentDto.setPatientId(patient.getUserId());
+    appointmentDto.setPatientName(getName(patient.getFirstName(), patient.getLastName()));
+
+    User operator = appointment.getCreatedBy();
+    appointmentDto.setOperatorId(appointment.getCreatedBy().getUserId());
+    appointmentDto.setOperatorName(getName(operator.getFirstName(), operator.getLastName()));
     return appointmentDto;
   }
 
@@ -87,7 +96,7 @@ public class AppointmentController {
     User patient = new User();
     patient.setUserId(appointmentDto.getPatientId());
     User createdBy = new User();
-    createdBy.setUserId(appointmentDto.getCreatedBy());
+    createdBy.setUserId(appointmentDto.getOperatorId());
     appointment.setDoctor(doctor);
     appointment.setPatient(patient);
     appointment.setCreatedBy(createdBy);
@@ -100,5 +109,9 @@ public class AppointmentController {
     } else if (!appointmentService.isValidIdentity(appointmentDto)) {
       throw new DataIntegrityViolationException("User Ids are not mapped to correct user type");
     }
+  }
+
+  private String getName(String fName, String lName) {
+    return fName + " " + lName;
   }
 }

@@ -39,7 +39,7 @@ public class AppointmentService {
   }
 
   public boolean isValidIdentity(AppointmentDto appointmentDto) {
-    boolean isValidAppointment = appointmentRepo.isValidIdentity(appointmentDto.getPatientId(), appointmentDto.getDoctorId(), appointmentDto.getCreatedBy()) > 0;
+    boolean isValidAppointment = appointmentRepo.isValidIdentity(appointmentDto.getPatientId(), appointmentDto.getDoctorId(), appointmentDto.getOperatorId()) > 0;
     return isValidAppointment;
   }
 

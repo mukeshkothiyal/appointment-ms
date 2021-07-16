@@ -1,8 +1,11 @@
 export interface IAppointment {
   appointmentId: string;
   doctorId: string;
+  doctorName: string;
   patientId: string;
-  createdBy: string;
+  patientName: string;
+  operatorId: string;
+  operatorName: string;
   createdTs: string;
   lastUpdatedTs: string;
   appointmentTime: string;
