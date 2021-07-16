@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
-import {UserService} from "./user.service";
-import {IUser} from "./user";
+import {UserService} from "../user.service";
+import {IUser} from "../user";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  templateUrl: './userDetail.component.html',
+  styleUrls: ['./userDetail.component.css']
 })
-export class UserComponent implements OnInit {
+export class UserDetailComponent implements OnInit {
 
   private sub!: Subscription;
   userDetail: IUser | undefined;

@@ -1,18 +1,19 @@
 import {NgModule} from '@angular/core';
-import {AppointmentComponent} from "./appointment/appointment.component";
-import {UserComponent} from "./user/user.component";
+import {UpcomingAppointmentComponent} from "./appointment/upcoming-appointment/upcomingAppointment.component";
+import {UserDetailComponent} from "./user/user-detail/userDetail.component";
 import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "../shared/shared.module";
+import { CreateAppointmentComponent } from './appointment/create-appointment/create-appointment.component';
 
 const routes: Routes = [
-  {path: 'user/:userId', component: UserComponent},
-  {path: 'appointments', component: AppointmentComponent}
+  {path: 'user/:userId', component: UserDetailComponent},
+  {path: 'appointments', component: UpcomingAppointmentComponent}
 ];
 
 @NgModule({
   declarations: [
-    AppointmentComponent,
-    UserComponent
+    UpcomingAppointmentComponent,
+    UserDetailComponent
   ],
   imports: [
     RouterModule.forChild(routes),

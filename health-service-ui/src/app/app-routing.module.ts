@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AppointmentComponent} from "./features/appointment/appointment.component";
+import {UpcomingAppointmentComponent} from "./features/appointment/upcoming-appointment/upcomingAppointment.component";
 
 const routes: Routes = [
-  {path: '', component: AppointmentComponent, pathMatch: 'full'}
+  {path: '', component: UpcomingAppointmentComponent, pathMatch: 'full'}
 ];
 
 @NgModule({
