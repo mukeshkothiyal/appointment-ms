@@ -32,7 +32,7 @@
           <td>
             <a [routerLink]="['/user', patient.patientId]">{{patient.patientName | titlecase}}</a>
           </td>
-          <td>{{patient.appointmentTime | date}}</td>
+          <td>{{patient.appointmentTime | date:'MMM d, y, h:mm a'}}</td>
           <td>
             <a [routerLink]="['/user', patient.doctorId]">{{patient.doctorName | titlecase}}</a>
           </td>
@@ -43,6 +43,6 @@
     </div>
   </div>
   <div class="card-footer">
-    <button class="btn btn-primary">Add New Appointment</button>
+    <button class="btn btn-primary" routerLink="/user/create">Add New Appointment</button>
   </div>
 </div>

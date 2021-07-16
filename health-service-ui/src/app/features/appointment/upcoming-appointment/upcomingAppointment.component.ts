@@ -40,7 +40,7 @@ export class UpcomingAppointmentComponent implements OnInit, OnDestroy {
 
   private performFilter(filterBy: string): IAppointment[] {
     filterBy = filterBy.toLowerCase();
-    return this.mockAppointments.filter((app: IAppointment) => app.patientId.toLowerCase().includes(filterBy));
+    return this.mockAppointments.filter((app: IAppointment) => app.patientName.toLowerCase().includes(filterBy));
   }
 
   ngOnDestroy() {

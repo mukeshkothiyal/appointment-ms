@@ -8,16 +8,22 @@ import {catchError, tap} from "rxjs/operators";
   providedIn: 'root'
 })
 export class AppointmentService {
-  private upcomingAppointments = 'https://localhost:9000/appointment/appointment/upcomingApp';
+  private url!: string;
 
   constructor(private http: HttpClient) {
   }
 
   getUpcomingAppointments(): Observable<IAppointment[]> {
-    return this.http.get<IAppointment[]>(this.upcomingAppointments).pipe(
+    this.url = 'https://localhost:9000/appointment/appointment/upcomingApp';
+    return this.http.get<IAppointment[]>(this.url).pipe(
       tap(data => console.log(JSON.stringify(data))),
       catchError(this.handleError)
     );
+  }
+
+  postNewAppointments(appointment: IAppointment): Observable<IAppointment> {
+    this.url = 'https://localhost:9000/appointment/appointment/';
+    return this.http.post<IAppointment>(this.url, appointment);
   }
 
   private handleError(err: HttpErrorResponse) {

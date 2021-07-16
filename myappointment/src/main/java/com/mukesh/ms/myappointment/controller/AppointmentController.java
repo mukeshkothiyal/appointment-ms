@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @RequestMapping("/appointment/")
-//@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class AppointmentController {
   AppointmentService appointmentService;
 

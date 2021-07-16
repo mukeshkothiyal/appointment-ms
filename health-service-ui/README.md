@@ -3,10 +3,20 @@
 A frontend application for health-service api.
 
 ## Wireframe
-#### Appointment Screen
+
+<details>
+<summary><b>Application screens (Click to expand)</b></summary>
+
+#### Upcoming Appointment Screen
 ![Appointment](../images/app-wireframes/ui/hs-ui-app.png)
+#### Appointment Creation Screen
+![User Details](../images/app-wireframes/ui/hs-ui-app-create.png)
+#### Appointment Creation Screen (Validation messages)
+![User Details](../images/app-wireframes/ui/hs-ui-app-create-validate.png)
 #### User Details Screen
 ![User Details](../images/app-wireframes/ui/hs-ui-user.png)
+
+</details>
 
 ## Development server
 

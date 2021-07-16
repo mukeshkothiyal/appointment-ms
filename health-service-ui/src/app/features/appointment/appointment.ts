@@ -6,8 +6,8 @@ export interface IAppointment {
   patientName: string;
   operatorId: string;
   operatorName: string;
-  createdTs: string;
-  lastUpdatedTs: string;
+  createdTs?: string;
+  lastUpdatedTs?: string;
   appointmentTime: string;
   additionalComment: string;
 }
