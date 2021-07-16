@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {IAppointment} from "./appointment";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {Observable, throwError} from "rxjs";
+import {Observable, of, throwError} from "rxjs";
 import {catchError, tap} from "rxjs/operators";
 
 @Injectable({
@@ -23,10 +23,12 @@ export class AppointmentService {
 
   postNewAppointments(appointment: IAppointment): Observable<IAppointment> {
     this.url = 'https://localhost:9000/appointment/appointment/';
-    return this.http.post<IAppointment>(this.url, appointment).pipe(
-      tap(data => console.log(JSON.stringify(data))),
-      catchError(this.handleError)
-    );
+    // TODO fix this!!!
+    // return this.http.post<IAppointment>(this.url, appointment).pipe(
+    //   tap(data => console.log(JSON.stringify(data))),
+    //   catchError(this.handleError)
+    // );
+    return of(appointment);
   }
 
   private handleError(err: HttpErrorResponse) {

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {IAppointment} from "../appointment";
 import {AppointmentService} from "../appointment.service";
 import {NgForm} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   templateUrl: './create-appointment.component.html',
@@ -12,9 +13,9 @@ export class CreateAppointmentComponent implements OnInit {
   appointment!: IAppointment;
   submitted: boolean = false;
   errorMessage: string = '';
-  isError:  boolean  = false;
+  isError: boolean = false;
 
-  constructor(private appointmentService: AppointmentService) {
+  constructor(private appointmentService: AppointmentService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -28,7 +29,8 @@ export class CreateAppointmentComponent implements OnInit {
       {
         next: result => {
           this.appointment = result
-          console.log("submitted request: " + this.appointment);
+          console.log("submitted request: " + JSON.stringify(this.appointment));
+          this.router.navigate(["/appointments"])
         },
         error: err => {
           this.isError = true;
