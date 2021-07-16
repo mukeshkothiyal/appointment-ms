@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {IAppointment} from "./appointment";
-import {AppointmentService} from "./appointment.service";
+import {IAppointment} from "../appointment";
+import {AppointmentService} from "../appointment.service";
 import {Subscriber, Subscription} from "rxjs";
 
 @Component({
-  templateUrl: './appointment.component.html',
-  styleUrls: ['./appointment.component.css']
+  templateUrl: './upcomingAppointment.component.html',
+  styleUrls: ['./upcomingAppointment.component.css']
 })
-export class AppointmentComponent implements OnInit, OnDestroy {
+export class UpcomingAppointmentComponent implements OnInit, OnDestroy {
   mockAppointments: IAppointment[] = [];
   filteredMockAppointments: IAppointment[] = [];
   errorMessage: string = '';

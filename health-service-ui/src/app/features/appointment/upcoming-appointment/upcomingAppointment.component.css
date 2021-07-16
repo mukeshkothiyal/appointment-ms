@@ -5,3 +5,5 @@ thead {
 .cust-head-1 {
   color: dodgerblue;
 }
+
+a:link { text-decoration: none; }

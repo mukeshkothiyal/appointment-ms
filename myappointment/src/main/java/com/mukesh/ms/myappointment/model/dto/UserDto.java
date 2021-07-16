@@ -23,7 +23,6 @@ public class UserDto {
   private UUID userId;
 
   @NotNull
-  @JsonIgnore
   public String pwd;
 
   @NotNull
