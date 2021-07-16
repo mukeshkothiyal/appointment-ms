@@ -1,5 +1,6 @@
 package com.mukesh.ms.myappointment.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mukesh.ms.myappointment.enumerations.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class UserDto {
   private UUID userId;
 
   @NotNull
+  @JsonIgnore
   public String pwd;
 
   @NotNull

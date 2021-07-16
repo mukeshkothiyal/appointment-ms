@@ -30,11 +30,11 @@
         <tbody>
         <tr *ngFor="let patient of filteredMockAppointments">
           <td>
-            <a [routerLink]="['/user', patient.patientId]">{{patient.patientId}}</a>
+            <a [routerLink]="['/user', patient.patientId]">{{patient.patientName | titlecase}}</a>
           </td>
           <td>{{patient.appointmentTime | date}}</td>
           <td>
-            <a [routerLink]="['/user', patient.doctorId]">{{patient.doctorId}}</a>
+            <a [routerLink]="['/user', patient.doctorId]">{{patient.doctorName | titlecase}}</a>
           </td>
           <td>{{patient.additionalComment | psv:','}}</td>
         </tr>
