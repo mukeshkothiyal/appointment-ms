@@ -1,8 +1,10 @@
 <h1>Health Service</h1>
 
+<div style="color: red">This is work in progress...</div>
+
 <p>
-A dumb down version of health service api. The core functionality it offers are appointment service, reminder service, 
-mailing service, prescription api, patient history, admin dashboard, patient dashboard etc.
+A dumb down version of health service api. The core functionality that will be offered by this API will be: 
+appointment service, reminder service, mailing service, prescription api, patient history, admin dashboard, patient dashboard etc.
 </p>
 
 <h2>Implementation Details</h2>
