@@ -6,6 +6,7 @@ import {SharedModule} from "../shared/shared.module";
 import { CreateAppointmentComponent } from './appointment/create-appointment/create-appointment.component';
 
 const routes: Routes = [
+  {path: 'user/create', component: CreateAppointmentComponent},
   {path: 'user/:userId', component: UserDetailComponent},
   {path: 'appointments', component: UpcomingAppointmentComponent}
 ];
@@ -13,7 +14,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     UpcomingAppointmentComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    CreateAppointmentComponent
   ],
   imports: [
     RouterModule.forChild(routes),

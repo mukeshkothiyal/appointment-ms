@@ -1,0 +1,69 @@
+<div class="card">
+  <div class="card-header">
+    <b>Create Appointment</b>
+  </div>
+  <div class="card-body">
+    <form #appointmentForm="ngForm" (ngSubmit)="onSubmit(appointmentForm)">
+      <div class="mb-3">
+        <label for="patientName" class="form-label">Name</label>
+        <input id="patientName" name="patientName" class="form-control" placeholder="Name" style="width: 50%" ngModel
+               required #patientNameField="ngModel"
+               [class.field-error]="appointmentForm.submitted && patientNameField.invalid">
+        <div [hidden]="!appointmentForm.submitted || patientNameField.valid"
+             class="alert alert-danger" style="width: 50%">
+          Enter Name
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="mobileNum" class="form-label">Mobile</label>
+        <input id="mobileNum" name="mobileNum" class="form-control" placeholder="0000000000" style="width: 50%" ngModel
+               required pattern="\d{10}" #mobileField="ngModel"
+               [class.field-error]="appointmentForm.submitted && mobileField.invalid">
+        <div [hidden]="!appointmentForm.submitted || mobileField.valid"
+             class="alert alert-danger" style="width: 50%">
+          Enter valid mobile number
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="doctorName" class="form-label">Doctor</label>
+        <input id="doctorName" name="doctorName" class="form-control" placeholder="Doctor's Name" style="width: 50%"
+               ngModel
+               required max="100" #doctorNameField="ngModel"
+               [class.field-error]="appointmentForm.submitted && doctorNameField.invalid">
+        <div [hidden]="!appointmentForm.submitted || doctorNameField.valid"
+             class="alert alert-danger" style="width: 50%">
+          Enter Doctor's Name
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="slot" class="form-label">Appointment Slot</label>
+        <input id="slot" name="slot" type="datetime-local" class="form-control" placeholder="Slot" style="width: 50%"
+               ngModel
+               required #slotField="ngModel" [class.field-error]="appointmentForm.submitted && slotField.invalid">
+        <div [hidden]="!appointmentForm.submitted || slotField.valid"
+             class="alert alert-danger" style="width: 50%">
+          Select slot for appointment
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="symptoms" class="form-label">Symptoms</label>
+        <textarea class="form-control" id="symptoms" name="symptoms" rows="3" style="width: 50%" ngModel
+                  required #symptomField="ngModel"
+                  [class.field-error]="appointmentForm.submitted && symptomField.invalid"></textarea>
+        <div [hidden]="!appointmentForm.submitted || symptomField.valid"
+             class="alert alert-danger" style="width: 50%">
+          Add basic symptoms
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <button class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+
+  </div>
+</div>
