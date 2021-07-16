@@ -60,6 +60,11 @@
         </div>
       </div>
 
+      <div [hidden]="!isError">
+        <div class="alert alert-danger">
+          {{errorMessage}}
+        </div>
+      </div>
       <div class="mb-3">
         <button class="btn btn-primary">Submit</button>
       </div>
