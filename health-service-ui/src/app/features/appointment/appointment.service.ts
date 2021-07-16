@@ -23,7 +23,10 @@ export class AppointmentService {
 
   postNewAppointments(appointment: IAppointment): Observable<IAppointment> {
     this.url = 'https://localhost:9000/appointment/appointment/';
-    return this.http.post<IAppointment>(this.url, appointment);
+    return this.http.post<IAppointment>(this.url, appointment).pipe(
+      tap(data => console.log(JSON.stringify(data))),
+      catchError(this.handleError)
+    );
   }
 
   private handleError(err: HttpErrorResponse) {

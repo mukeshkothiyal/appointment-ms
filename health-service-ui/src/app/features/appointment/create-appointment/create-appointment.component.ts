@@ -11,7 +11,8 @@ export class CreateAppointmentComponent implements OnInit {
 
   appointment!: IAppointment;
   submitted: boolean = false;
-  private errorMessage: string = '';
+  errorMessage: string = '';
+  isError:  boolean  = false;
 
   constructor(private appointmentService: AppointmentService) {
   }
@@ -30,8 +31,8 @@ export class CreateAppointmentComponent implements OnInit {
           console.log("submitted request: " + this.appointment);
         },
         error: err => {
-          this.errorMessage = err
-          console.log(this.errorMessage)
+          this.isError = true;
+          this.errorMessage = "Error while submitting request: " + err.statusText;
         }
       }
     );
