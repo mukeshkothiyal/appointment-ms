@@ -57,6 +57,7 @@ Manually creating topic and testing via consumer and producer
 <p>To generate docker compose diagram:</p>
 
 <h6>Boxed Diagram (HLD)</h6>
+
 ![image](images/arch/hld-bd.png)
 
 <h6>Container Diagram</h6>
