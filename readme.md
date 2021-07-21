@@ -55,12 +55,16 @@ Manually creating topic and testing via consumer and producer
 
 <h5>Design</h5>
 <p>To generate docker compose diagram:</p>
-<h6>Architecture Diagram</h6>
+
+<h6>Boxed Diagram (HLD)</h6>
+![image](images/arch/hld-bd.png)
+
+<h6>Container Diagram</h6>
 <code>docker run --rm -it --name dcv -v $(pwd):/input pmsipilot/docker-compose-viz render -m image docker-compose.yml -o images/arch/arch-diag.png --force</code>
 
 ![image](images/arch/arch-diag.png)
 
-<h6>Architecture Diagram - No Ports,Volumes</h6>
+<h6>Container Diagram - No Ports,Volumes</h6>
 <code>docker run --rm -it --name dcv -v $(pwd):/input pmsipilot/docker-compose-viz render -m image docker-compose.yml --no-volumes --no-ports -o images/arch/arch-diag-no-vol-no-ports.png --force</code>
 
 ![image](images/arch/arch-diag-no-vol-no-ports.png)
